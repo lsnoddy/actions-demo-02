@@ -1,0 +1,29 @@
+name: learn-github-actions
+run-name: ${{ github.actor }} is learning GitHub Actions (${{ github.event_name }})
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch: 
+
+jobs:
+  explore:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say hello
+        run: echo "Hi ${{ github.actor }}, triggered by ${{ github.event_name }}"
+
+      - name: Look around the runner
+        run: |
+          echo "Runner OS: ${{ runner.os }}"
+          echo "Workspace: $GITHUB_WORKSPACE"
+          echo "Files before checkout:"
+          ls -la
+
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      - name: Look again after checkout
+        run: ls -la
+
